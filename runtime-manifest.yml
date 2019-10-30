@@ -1,0 +1,28 @@
+# runtime.yml
+---
+releases:
+- name: oms-agent-for-linux
+  version: 1.9.0-0
+addons:
+- name: omsagent
+  jobs:
+  - name: omsagent
+    release: oms-agent-for-linux
+  exclude:
+    stemcell:
+    - os: windows2012R2
+    - os: windows2016
+    - os: windows2019
+    - os: windows1803
+  properties:
+    # Get the OMS workspace ID and key from OMS Portal
+    oms:
+      workspace_id: ecc87a74-df03-47e2-992c-eb433c317d1a
+      workspace_key: "biwIeiYxCj/o+1FLLqnzS47v/7WE3S99JLQcVxpRj++rNPMgZcgK0WhoDbaHvAU95YoH3zEYJocwijNWprNpgg=="
+    # Set the rsyslog config as needed, optional
+    rsyslog:
+      selector_list:
+      - user.*
+      - syslog.*
+      port: 25224
+      protocol_type: udp
